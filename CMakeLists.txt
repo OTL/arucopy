@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 2.8)
+project(arucopy)
+set(CMAKE_MODULE_PATH ${CMAKE_INSTALL_PREFIX}/lib/cmake/)
+
+find_package(aruco REQUIRED)
+find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS python)
+
+include_directories("${Boost_INCLUDE_DIRS}" "/usr/include/python2.7")
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+add_library(arucopy SHARED arucopy.cpp)
+set_target_properties(arucopy PROPERTIES PREFIX "")
+target_link_libraries(arucopy ${Boost_LIBRARIES} ${aruco_LIBS})
