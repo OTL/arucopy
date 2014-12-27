@@ -16,7 +16,7 @@ include_dirs = []
 library_dirs = []
  
 # define the libraries to link with the boost python library
-libraries = [ 'boost_python', 'opencv_video', 'aruco' ]
+libraries = [ 'boost_python', 'raspicam_cv', 'aruco' ]
 # define the source files for the extension
 source_files = [ 'arucopy.cpp' ]
  

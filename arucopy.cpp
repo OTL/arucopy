@@ -5,18 +5,27 @@
 #include <boost/python.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/opencv.hpp>
+#include <raspicam/raspicam_cv.h>
 
 class MarkerDetector {
 public:
   MarkerDetector()
-    : m_cap(0)
+    : m_cap()
     , m_detector()
     , m_markers()
     , m_img() {
+    m_cap.set(CV_CAP_PROP_FORMAT, CV_8UC1);
+    if (!m_cap.open()) {
+      std::cerr << "failed to open camera" << std::endl;
+    }
+  }
+  ~MarkerDetector() {
+    m_cap.release();
   }
   boost::python::list detect() {
     m_markers.clear();
-    m_cap >> m_img;
+    m_cap.grab();
+    m_cap.retrieve(m_img);
     m_detector.detect(m_img, m_markers);
     boost::python::list py_list;
     for (std::vector<aruco::Marker>::const_iterator it = m_markers.begin();
@@ -41,7 +50,7 @@ public:
   }
 
 private:
-  cv::VideoCapture m_cap;
+  raspicam::RaspiCam_Cv m_cap;
   aruco::MarkerDetector m_detector;
   std::vector<aruco::Marker> m_markers;
   cv::Mat m_img;
