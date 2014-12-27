@@ -1,23 +1,24 @@
 arucopy
 =======
 
-aruco library for boost.python
+Python Marker recognition using aruco library.
+This uses cv::VideoCapture to get image in c++ code.
+This is not compatible with python-opencv yet.
 
 precondition
 -------------
 - [aruco](http://sourceforge.net/projects/aruco/)
 - boost.python
-- python2.7 (If you want to use different version, edit CMakeLists.txt)
 
-build
+build and install
 -------------
 
 ```bash
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+$ cd arucopy
+$ python setup.py build
+$ sudo python setup.py install
 ```
+
 sample
 -------------
 
