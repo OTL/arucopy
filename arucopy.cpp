@@ -15,6 +15,8 @@ public:
     , m_markers()
     , m_img() {
     m_cap.set(CV_CAP_PROP_FORMAT, CV_8UC1);
+    m_cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
+    m_cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
     if (!m_cap.open()) {
       std::cerr << "failed to open camera" << std::endl;
     }
